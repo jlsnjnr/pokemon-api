@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Montserrat';
+  }
+}
+
+.bg-gradient-red {
+  background: radial-gradient(92.5% 92.5% at 55.1% 110.7%, #AB0001 0%, rgba(171, 0, 1, 0) 100%);
+}
+
+.banner {
+  @apply h-[721px] w-full bg-red-500;
+}
+
+.banner-overlay {
+  @apply h-[721px] w-full bg-gradient-red relative;
+}
+
+.banner-search {
+  @apply h-[364px] w-full bg-white;
+}
+
+.banner-overlay-search {
+  background: linear-gradient(284.15deg, #EFF3F6 15.54%, rgba(239, 243, 246, 0) 86.34%);
+}
