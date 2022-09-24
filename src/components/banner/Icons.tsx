@@ -1,6 +1,6 @@
-import plant from './../../../public/plant.png';
-import fire from './../../../public/fire.png';
-import ice from './../../../public/ice.png';
+import plant from '/plant.png';
+import fire from '/fire.png';
+import ice from '/ice.png';
 
 export function Icons() {
   return (
