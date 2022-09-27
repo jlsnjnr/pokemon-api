@@ -21,7 +21,7 @@ interface ColorProps {
 }
 
 export function Icons({ color }: ColorProps) {
-  console.log(color)
+
   return (
     <div className="relative">
       {/* desktop and mobile */}

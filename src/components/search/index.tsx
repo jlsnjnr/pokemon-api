@@ -8,7 +8,7 @@ export function Search() {
           Select your Pokémon
         </h2>
 
-        <div className="w-full lg:w-[403px] flex mt-20 lg:mt-0 relative px-5">
+        <form className="w-full lg:w-[403px] flex mt-20 lg:mt-0 relative px-5">
           <button className="absolute top-2 left-8 w-[42px] h-[42px] bg-blue-5 rounded-full flex items-center justify-center">
             <MagnifyingGlass size={22} color="#3E75C3" />
           </button>
@@ -17,7 +17,7 @@ export function Search() {
             type="text"
             placeholder="Search name or code"
           />
-        </div>
+        </form>
       </div>
     </div>
   )
