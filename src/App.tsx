@@ -12,7 +12,7 @@ import { Results } from "./components/results/Results";
 import pokebolaIcon from "/icon.png";
 
 // baseURL
-import { api } from "./services/api";
+import { api, apiSingle } from "./services/api";
 import { Pokemon, Response } from './types/Pokemon';
 import { MagnifyingGlass } from 'phosphor-react';
 
@@ -27,6 +27,23 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("");
 
+  async function handleSearch(event: FormEvent) {
+    event.preventDefault();
+
+    if (search === '') {
+      return;
+    }
+
+    apiSingle.get(`${search}`)
+      .then((response) => {
+        // @ts-ignore
+        setPokemons(response.data)
+      })
+      .catch((err) => {
+        console.error('Ops! deu erro :( ' + err)
+      })
+  }
+
   useEffect(() => {
     api
       .get<Response>('/pokemon')
@@ -37,21 +54,8 @@ function App() {
       .catch((err) => {
         console.error('Ops! deu erro :( ' + err)
       })
+
   }, [])
-
-  // async function handleSearch(event: FormEvent) {
-  //   event.preventDefault();
-
-  //   if (!search.trim()) {
-  //     return;
-  //   }
-
-  //   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${search}`);
-  //   const data = await response.json();
-
-  //   setPokemons(data);
-  //   // console.log(data)
-  // }
 
   return (
     <>
@@ -59,9 +63,9 @@ function App() {
 
       {/* search component  */}
 
-      <Search />
+      {/* <Search /> */}
 
-      {/* <div className="banner-search banner-overlay-search flex">
+      <div className="banner-search banner-overlay-search flex">
         <div className="flex items-center justify-center flex-col lg:flex-row lg:container lg:mx-auto lg:justify-between">
           <h2 className="font-bold text-3xl lg:max-w-[265px]">
             Select your Pokémon
@@ -71,6 +75,7 @@ function App() {
             <button type="submit" className="absolute top-2 left-8 w-[42px] h-[42px] bg-blue-5 rounded-full flex items-center justify-center">
               <MagnifyingGlass size={22} color="#3E75C3" />
             </button>
+
             <input
               className="w-full h-14 rounded-full px-16 lg:w-[403px] lg:h-[56px]"
               type="text"
@@ -78,9 +83,10 @@ function App() {
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
+
           </form>
         </div>
-      </div> */}
+      </div>
 
       {/* results */}
       <div className="lg:container lg:mx-auto">
@@ -114,13 +120,22 @@ function App() {
             {/* pokémons */}
             <div className="lg:grid lg:grid-cols-3 lg:w-full lg:gap-2">
               {/* {loading === true && (<h1>carregando...</h1>)}
-
+  
               {loading === false && (<Results allPokemons={allPokemons} />)} */}
-              {pokemons.map((pokemon) => (
+              {pokemons.length >= 2 && pokemons.map((pokemon) => (
                 <div key={pokemon.name}>
                   <Results url={pokemon.url} />
                 </div>
               ))}
+
+              {pokemons && (
+                <div>
+                  {/* @ts-ignore */}
+                  <h1>{pokemons.name}</h1>
+                  {/* @ts-ignore */}
+                  <h1>{pokemons.weight}</h1>
+                </div>
+              )}
             </div>
 
           </div>
