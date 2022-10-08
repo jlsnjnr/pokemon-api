@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     api
-      .get<Response>('/pokemon')
+      .get<Response>('/pokemon/')
       .then((response) => {
         setPokemons(response.data.results)
         setLoading(false);
